@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Elite Trading Journal</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:tahoma;
+}
+
+:root{
+
+--bg:#0b1220;
+--card:#131b2e;
+--card2:#1b2640;
+--border:#2a3856;
+
+--blue:#3b82f6;
+--purple:#8b5cf6;
+
+--green:#22c55e;
+--red:#ef4444;
+--yellow:#f59e0b;
+
+--text:#ffffff;
+--muted:#94a3b8;
+
+}
+
+body{
+
+background:var(--bg);
+color:var(--text);
+
+}
+
+.container{
+
+max-width:1600px;
+margin:auto;
+padding:20px;
+
+}
+
+.header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+
+}
+
+.logo{
+
+font-size:28px;
+font-weight:bold;
+
+background:linear-gradient(
+90deg,
+var(--blue),
+var(--purple)
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.top-buttons{
+
+display:flex;
+gap:10px;
+
+}
+
+.btn{
+
+border:none;
+padding:12px 16px;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+color:white;
+
+background:linear-gradient(
+90deg,
+var(--blue),
+var(--purple)
+);
+
+}
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(180px,1fr)
+);
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+.card{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+.card-title{
+
+font-size:13px;
+color:var(--muted);
+
+}
+
+.card-value{
+
+font-size:30px;
+font-weight:bold;
+margin-top:8px;
+
+}
+
+.green{
+
+color:var(--green);
+
+}
+
+.red{
+
+color:var(--red);
+
+}
+
+.yellow{
+
+color:var(--yellow);
+
+}
+
+.section{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:20px;
+
+margin-bottom:20px;
+
+}
+
+.section h2{
+
+margin-bottom:15px;
+
+}
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(180px,1fr)
+);
+
+gap:12px;
+
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+
+padding:12px;
+
+background:var(--card2);
+
+border:1px solid var(--border);
+
+border-radius:12px;
+
+color:white;
+
+}
+
+textarea{
+
+height:100px;
+resize:none;
+
+}
+
+label{
+
+display:block;
+margin-bottom:5px;
+
+font-size:13px;
+
+color:var(--muted);
+
+}
+
+.mistakes{
+
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+
+margin-top:10px;
+
+}
+
+.mistakes label{
+
+color:white;
+
+}
+
+.save-btn{
+
+margin-top:15px;
+
+width:100%;
+
+}
+
+.filters{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(180px,1fr)
+);
+
+gap:10px;
+
+margin-bottom:15px;
+
+}
+
+.table-container{
+
+overflow:auto;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:1400px;
+
+}
+
+th{
+
+background:var(--card2);
+
+padding:12px;
+
+font-size:14px;
+
+}
+
+td{
+
+padding:10px;
+
+border-bottom:
+1px solid var(--border);
+
+text-align:center;
+
+}
+
+.badge{
+
+padding:6px 10px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+.valid{
+
+background:#14532d;
+
+}
+
+.fomo{
+
+background:#7f1d1d;
+
+}
+
+.revenge{
+
+background:#6b21a8;
+
+}
+
+.overtrade{
+
+background:#92400e;
+
+}
+
+.gradeA{
+
+color:#22c55e;
+font-weight:bold;
+
+}
+
+.gradeB{
+
+color:#84cc16;
+font-weight:bold;
+
+}
+
+.gradeC{
+
+color:#f59e0b;
+font-weight:bold;
+
+}
+
+.gradeD{
+
+color:#ef4444;
+font-weight:bold;
+
+}
+
+.delete-btn{
+
+background:#dc2626;
+
+padding:8px 12px;
+
+border:none;
+
+border-radius:10px;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+.analytics{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(250px,1fr)
+);
+
+gap:15px;
+
+}
+
+.analytics-card{
+
+background:var(--card2);
+
+padding:15px;
+
+border-radius:15px;
+
+}
+
+.analytics-card h3{
+
+margin-bottom:10px;
+
+}
+
+
+.buy{color:#60a5fa;font-weight:bold}.sell{color:#fb923c;font-weight:bold}.row-win{background:rgba(34,197,94,.08)}.row-loss{background:rgba(239,68,68,.08)}.row-be{background:rgba(245,158,11,.08)}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="logo">
+Elite Trading Journal
+</div>
+
+<div class="top-buttons">
+
+<button class="btn"
+onclick="exportData()">
+Export JSON
+</button>
+
+<button class="btn"
+onclick="importData()">
+Import JSON
+</button>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="card">
+<div class="card-title">
+تعداد معاملات
+</div>
+<div class="card-value"
+id="totalTrades">
+0
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Win Rate
+</div>
+<div class="card-value green"
+id="winRate">
+0%
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Total PNL
+</div>
+<div class="card-value"
+id="totalPnL">
+0$
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Profit Factor
+</div>
+<div class="card-value"
+id="profitFactor">
+0
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Average RR
+</div>
+<div class="card-value"
+id="avgRR">
+0
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">
+Best Session
+</div>
+<div class="card-value"
+id="bestSession">
+</div>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>ثبت معامله جدید <small style='color:#94a3b8'>(مرحله ۲)</small></h2>
+
+<div class="form-grid">
+
+<div>
+<label>نماد</label>
+<input id="symbol" placeholder="XAUUSD">
+</div>
+
+<div>
+<label>نوع معامله</label>
+<select id="side">
+<option>BUY</option>
+<option>SELL</option>
+</select>
+</div>
+
+<div>
+<label>سشن</label>
+<select id="session">
+
+<option>London</option>
+<option>New York</option>
+<option>Tokyo</option>
+
+</select>
+</div>
+
+<div>
+<label>استراتژی</label>
+<select id="strategy">
+
+<option>BTB PRO</option>
+<option>SP2L</option>
+<option>SP2S</option>
+<option>Liquidity Sweep</option>
+<option>Order Block</option>
+<option>Breaker Block</option>
+<option>Breakout</option>
+<option>Reversal</option>
+<option>Micro Map</option>
+<option>Weekly Map</option>
+<option>Trend Line</option>
+<option>FVG</option>
+<option>IFVG</option>
+<option>BOS</option>
+<option>CHoCH</option>
+<option>MSS</option>
+<option>SMT</option>
+
+</select>
+</div>
+
+<div>
+<label>Entry Price</label>
+<input id="entryPrice" type="number">
+</div>
+
+<div>
+<label>Stop Loss</label>
+<input id="stopLoss" type="number">
+</div>
+
+<div>
+<label>Take Profit</label>
+<input id="takeProfit" type="number">
+</div>
+
+<div>
+<label>Lot Size</label>
+<input id="lotSize" type="number" step="0.01">
+</div>
+
+<div>
+<label>Risk %</label>
+<input id="riskPercent" type="number" step="0.1">
+</div>
+
+<div>
+<label>RR</label>
+<input id="rr" type="number" step="0.1">
+</div>
+
+<div>
+<label>PNL</label>
+<input id="pnlInput" type="number">
+</div>
+
+<div>
+<label>مدت معامله</label>
+<input id="duration" placeholder="30m">
+</div>
+
+</div>
+
+<br>
+
+<h3>دلیل ورود</h3>
+
+<div class="form-grid">
+
+<select id="entryReason">
+
+<option>BTB Confirmation</option>
+<option>SP2L Setup</option>
+<option>SP2S Setup</option>
+<option>Liquidity Sweep</option>
+<option>Break Of Structure</option>
+<option>Order Block</option>
+<option>Breaker Block</option>
+<option>Trend Continuation</option>
+<option>Reversal</option>
+<option>Support Resistance</option>
+<option>Custom</option>
+
+</select>
+
+<input id="customEntry"
+placeholder="دلیل ورود سفارشی">
+
+</div>
+
+<br>
+
+<h3>نتیجه معامله</h3>
+<select id="tradeResult" onchange="toggleStopReason()">
+<option>SL Hit</option>
+<option>TP Hit</option>
+<option>Break Even</option>
+<option>Partial TP</option>
+<option>Manual Close</option>
+<option>Trailing Stop</option>
+</select>
+<br><br>
+<h3>دلیل خروج</h3>
+
+<div class="form-grid">
+
+<select id="exitReason">
+
+<option>Take Profit Hit</option>
+<option>Partial TP</option>
+<option>Trailing Stop</option>
+<option>Structure Break</option>
+<option>Manual Close</option>
+<option>Session End</option>
+<option>News Event</option>
+<option>Risk Management</option>
+<option>Custom</option>
+
+</select>
+
+<input id="customExit"
+placeholder="دلیل خروج سفارشی">
+
+</div>
+
+<br>
+
+<h3>دلیل استاپ</h3>
+
+<div class="form-grid">
+
+<select id="stopReason">
+
+<option>Technical Stop</option>
+<option>Structure Invalidated</option>
+<option>Liquidity Grab</option>
+<option>News Spike</option>
+<option>Early Entry</option>
+<option>FOMO Entry</option>
+<option>No Confirmation</option>
+<option>Rule Violation</option>
+<option>Custom</option>
+
+</select>
+
+<input id="customStop"
+placeholder="دلیل استاپ سفارشی">
+
+</div>
+
+<br>
+
+<h3>کیفیت ستاپ</h3>
+
+<select id="setupGrade">
+
+<option>A+</option>
+<option>A</option>
+<option>B</option>
+<option>C</option>
+<option>D</option>
+
+</select>
+
+<br><br>
+
+<h3>وضعیت ذهنی قبل از معامله</h3>
+
+<select id="moodBefore">
+
+<option>Focused 😎</option>
+<option>Normal 😐</option>
+<option>Tired 😴</option>
+<option>Angry 😡</option>
+<option>Confident 🔥</option>
+
+</select>
+
+<br><br>
+
+<h3>احساس بعد از معامله</h3>
+
+<select id="moodAfter">
+
+<option>طبق پلن بود</option>
+<option>راضی</option>
+<option>ناراضی</option>
+<option>عجله کردم</option>
+<option>خارج از پلن بود</option>
+
+</select>
+
+<br><br>
+
+<h3>اشتباهات معامله</h3>
+
+<div class="mistakes">
+
+<label>
+<input type="checkbox"
+id="fomo">
+FOMO
+</label>
+
+<label>
+<input type="checkbox"
+id="revenge">
+Revenge
+</label>
+
+<label>
+<input type="checkbox"
+id="overtrade">
+Overtrade
+</label>
+
+<label>
+<input type="checkbox"
+id="earlyEntry">
+Early Entry
+</label>
+
+<label>
+<input type="checkbox"
+id="lateEntry">
+Late Entry
+</label>
+
+<label>
+<input type="checkbox"
+id="noConfirmation">
+No Confirmation
+</label>
+
+<label>
+<input type="checkbox"
+id="brokeRules">
+Broke Rules
+</label>
+
+</div>
+
+<br>
+
+<h3>اسکرین‌شات قبل معامله</h3>
+
+<input
+type="file"
+id="beforeImage">
+
+<br><br>
+
+<h3>اسکرین‌شات بعد معامله</h3>
+
+<input
+type="file"
+id="afterImage">
+
+<br><br>
+
+<h3>یادداشت معامله</h3>
+
+<textarea
+id="tradeNotes"
+placeholder="هر نکته‌ای درباره معامله...">
+</textarea>
+
+<button
+class="btn save-btn"
+onclick="addTrade()">
+
+ثبت معامله
+
+</button>
+
+</div>
+
+<div class="section">
+
+<h2>فیلتر معاملات</h2>
+
+<div class="filters">
+
+<input
+id="searchInput"
+placeholder="جستجو..."
+onkeyup="renderTrades()">
+
+<select
+id="strategyFilter"
+onchange="renderTrades()">
+
+<option value="">
+همه استراتژی‌ها
+</option>
+
+<option>BTB PRO</option>
+<option>SP2L</option>
+<option>SP2S</option>
+
+</select>
+
+<select
+id="sessionFilter"
+onchange="renderTrades()">
+
+<option value="">
+همه سشن‌ها
+</option>
+
+<option>London</option>
+<option>New York</option>
+<option>Tokyo</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>آمار تحلیلی</h2>
+
+<div class="analytics">
+
+<div class="analytics-card">
+<h3>Best Strategy</h3>
+<div id="bestStrategy">-</div>
+</div>
+
+<div class="analytics-card">
+<h3>Worst Strategy</h3>
+<div id="worstStrategy">-</div>
+</div>
+
+<div class="analytics-card">
+<h3>Most Common Mistake</h3>
+<div id="commonMistake">-</div>
+</div>
+
+<div class="analytics-card">
+<h3>Average Winner</h3>
+<div id="averageWinner">0</div>
+</div>
+
+<div class="analytics-card">
+<h3>Average Loser</h3>
+<div id="averageLoser">0</div>
+</div>
+
+<div class="analytics-card">
+<h3>Expectancy</h3>
+<div id="expectancy">0</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>لیست معاملات</h2>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr class='${(t.tradeResult||"").includes("TP")?"row-win":((t.tradeResult||"").includes("SL")?"row-loss":"row-be")}'>
+
+<th>تاریخ</th>
+
+<th>نماد</th>
+
+<th>Side</th>
+
+<th>Session</th>
+
+<th>Strategy</th>
+
+<th>Entry Reason</th>
+
+<th>Result</th><th>Exit Reason</th>
+
+<th>Stop Reason</th>
+
+<th>Grade</th>
+
+<th>RR</th>
+
+<th>PNL</th>
+
+<th>Mistakes</th>
+
+<th>Notes</th>
+
+<th>جزئیات</th><th>حذف</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tradeTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+let trades =
+JSON.parse(
+localStorage.getItem(
+"eliteJournal"
+)
+) || [];
+
+function saveData(){
+
+localStorage.setItem(
+"eliteJournal",
+JSON.stringify(trades)
+);
+
+}
+
+
+function toggleStopReason(){
+ const result=document.getElementById('tradeResult');
+ const stop=document.getElementById('stopReason');
+ const custom=document.getElementById('customStop');
+ if(!result||!stop) return;
+ const need = result.value==='SL Hit';
+ stop.disabled=!need;
+ if(custom) custom.disabled=!need;
+ if(!need){
+   stop.value='Technical Stop';
+   if(custom) custom.value='';
+ }
+}
+
+function addTrade(){
+
+
+let mistakes=[];
+
+if(fomo.checked)
+mistakes.push("FOMO");
+
+if(revenge.checked)
+mistakes.push("Revenge");
+
+if(overtrade.checked)
+mistakes.push("Overtrade");
+
+if(earlyEntry.checked)
+mistakes.push("Early Entry");
+
+if(lateEntry.checked)
+mistakes.push("Late Entry");
+
+if(noConfirmation.checked)
+mistakes.push("No Confirmation");
+
+if(brokeRules.checked)
+mistakes.push("Broke Rules");
+
+
+if(document.getElementById('tradeResult')?.value==='SL Hit' &&
+ !document.getElementById('stopReason').value){
+ alert('برای SL Hit دلیل استاپ را مشخص کن');
+ return;
+}
+
+const trade={
+tradeResult: document.getElementById('tradeResult')?.value || '',
+
+
+date:new Date()
+.toLocaleString(),
+
+symbol:
+document.getElementById("symbol").value,
+
+side:
+document.getElementById("side").value,
+
+session:
+document.getElementById("session").value,
+
+strategy:
+document.getElementById("strategy").value,
+
+entryReason:
+document.getElementById("entryReason").value,
+
+exitReason:
+document.getElementById("exitReason").value,
+
+stopReason:
+document.getElementById("stopReason").value,
+
+setupGrade:
+document.getElementById("setupGrade").value,
+
+rr:
+parseFloat(
+document.getElementById("rr").value
+)||0,
+
+pnl:
+parseFloat(
+document.getElementById("pnlInput").value
+)||0,
+
+notes:
+document.getElementById("tradeNotes").value,
+
+mistakes:
+mistakes.join(", ")
+
+};
+
+trades.unshift(trade);
+
+saveData();
+
+renderTrades();
+toggleStopReason();
+
+}
+
+function deleteTrade(index){
+
+trades.splice(index,1);
+
+saveData();
+
+renderTrades();
+
+}
+
+function renderTrades(){
+
+let body="";
+
+let wins=0;
+
+let pnl=0;
+
+let grossWin=0;
+
+let grossLoss=0;
+
+let rrTotal=0;
+
+let strategyStats={};
+
+let sessionStats={};
+
+let mistakesStats={};
+
+let winners=[];
+
+let losers=[];
+
+const search=
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+const strategyFilter=
+document
+.getElementById("strategyFilter")
+.value;
+
+const sessionFilter=
+document
+.getElementById("sessionFilter")
+.value;
+
+trades.forEach((t,index)=>{
+
+if(
+strategyFilter &&
+t.strategy!==strategyFilter
+)
+return;
+
+if(
+sessionFilter &&
+t.session!==sessionFilter
+)
+return;
+
+const text=
+JSON.stringify(t)
+.toLowerCase();
+
+if(
+search &&
+!text.includes(search)
+)
+return;
+
+if(t.pnl>0){
+
+wins++;
+
+grossWin+=t.pnl;
+
+winners.push(t.pnl);
+
+}else{
+
+grossLoss+=Math.abs(t.pnl);
+
+losers.push(t.pnl);
+
+}
+
+pnl+=t.pnl;
+
+rrTotal+=t.rr;
+
+strategyStats[t.strategy]=
+(strategyStats[t.strategy]||0)
++t.pnl;
+
+sessionStats[t.session]=
+(sessionStats[t.session]||0)
++t.pnl;
+
+if(t.mistakes){
+
+t.mistakes.split(", ")
+.forEach(m=>{
+
+if(m){
+
+mistakesStats[m]=
+(mistakesStats[m]||0)+1;
+
+}
+
+});
+
+}
+
+body += `
+<tr class='${(t.tradeResult||"").includes("TP")?"row-win":((t.tradeResult||"").includes("SL")?"row-loss":"row-be")}'>
+<td>${t.date}</td>
+<td>${t.symbol}</td>
+<td class='${t.side==="BUY"?"buy":"sell"}'>${t.side}</td>
+<td>${t.session}</td>
+<td>${t.strategy}</td>
+<td>${t.entryReason}</td>
+<td>${t.tradeResult||''}</td><td>${t.exitReason}</td>
+<td>${t.stopReason}</td>
+<td>${t.setupGrade}</td>
+<td>${t.rr}</td>
+<td class="${t.pnl>=0?'green':'red'}">${t.pnl}</td>
+<td>${t.mistakes}</td>
+<td>${t.notes}</td>
+<td><button class='btn' onclick='showTradeDetails(${index})'>👁</button></td><td><button class="delete-btn" onclick="deleteTrade(${index})">X</button></td>
+</tr>
+`;
+
+
+});
+
+document
+.getElementById("tradeTable")
+.innerHTML=body;
+
+document
+.getElementById("totalTrades")
+.innerText=
+trades.length;
+
+document
+.getElementById("winRate")
+.innerText=
+(
+trades.length
+?
+(wins/trades.length)*100
+:0
+).toFixed(1)+"%";
+
+document
+.getElementById("totalPnL")
+.innerText=
+pnl.toFixed(2);
+
+document
+.getElementById("profitFactor")
+.innerText=
+grossLoss
+?
+(grossWin/grossLoss).toFixed(2)
+:
+grossWin.toFixed(2);
+
+document
+.getElementById("avgRR")
+.innerText=
+trades.length
+?
+(rrTotal/trades.length).toFixed(2)
+:
+0;
+
+let bestSession="-";
+let bestSessionPnL=-999999;
+
+for(let s in sessionStats){
+
+if(sessionStats[s]>bestSessionPnL){
+
+bestSessionPnL=sessionStats[s];
+bestSession=s;
+
+}
+
+}
+
+document
+.getElementById("bestSession")
+.innerText=
+bestSession;
+
+let bestStrategy="-";
+let bestValue=-999999;
+
+let worstStrategy="-";
+let worstValue=999999;
+
+for(let s in strategyStats){
+
+if(strategyStats[s]>bestValue){
+
+bestValue=strategyStats[s];
+bestStrategy=s;
+
+}
+
+if(strategyStats[s]<worstValue){
+
+worstValue=strategyStats[s];
+worstStrategy=s;
+
+}
+
+}
+
+document
+.getElementById("bestStrategy")
+.innerText=
+bestStrategy;
+
+document
+.getElementById("worstStrategy")
+.innerText=
+worstStrategy;
+
+let commonMistake="-";
+let commonCount=0;
+
+for(let m in mistakesStats){
+
+if(mistakesStats[m]>commonCount){
+
+commonCount=
+mistakesStats[m];
+
+commonMistake=m;
+
+}
+
+}
+
+document
+.getElementById("commonMistake")
+.innerText=
+commonMistake;
+
+let avgWinner=0;
+
+if(winners.length){
+
+avgWinner=
+winners.reduce(
+(a,b)=>a+b,0
+)
+/winners.length;
+
+}
+
+let avgLoser=0;
+
+if(losers.length){
+
+avgLoser=
+losers.reduce(
+(a,b)=>a+b,0
+)
+/losers.length;
+
+}
+
+document
+.getElementById("averageWinner")
+.innerText=
+avgWinner.toFixed(2);
+
+document
+.getElementById("averageLoser")
+.innerText=
+avgLoser.toFixed(2);
+
+let expectancy=0;
+
+if(trades.length){
+
+let winRate=
+wins/trades.length;
+
+let lossRate=
+1-winRate;
+
+expectancy=
+(
+winRate*
+avgWinner
+)
++
+(
+lossRate*
+avgLoser
+);
+
+}
+
+document
+.getElementById("expectancy")
+.innerText=
+expectancy.toFixed(2);
+
+}
+
+function exportData(){
+
+const dataStr=
+JSON.stringify(
+trades,
+null,
+2
+);
+
+const blob=
+new Blob(
+[dataStr],
+{
+type:
+"application/json"
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"EliteJournalBackup.json";
+
+a.click();
+
+}
+
+function importData(){
+
+const input=
+document.createElement("input");
+
+input.type="file";
+
+input.accept=".json";
+
+input.onchange=
+e=>{
+
+const file=
+e.target.files[0];
+
+const reader=
+new FileReader();
+
+reader.onload=
+function(event){
+
+try{
+
+const imported=
+JSON.parse(
+event.target.result
+);
+
+trades=
+imported;
+
+saveData();
+
+renderTrades();
+
+alert(
+"Backup Restored"
+);
+
+}catch{
+
+alert(
+"Invalid File"
+);
+
+}
+
+};
+
+reader.readAsText(file);
+
+};
+
+input.click();
+
+}
+
+renderTrades();
+
+
+function showTradeDetails(index){
+ const t = trades[index];
+ const resultColor =
+  (t.tradeResult||'').includes('TP') ? '#22c55e' :
+  (t.tradeResult||'').includes('SL') ? '#ef4444' : '#f59e0b';
+
+ document.getElementById('tradeModalContent').innerHTML = `
+ <div style="display:grid;gap:8px">
+ <div><b>نماد:</b> ${t.symbol||''}</div>
+ <div><b>استراتژی:</b> ${t.strategy||''}</div>
+ <div><b>سشن:</b> ${t.session||''}</div>
+ <div><b>نتیجه:</b> <span style="color:${resultColor}">${t.tradeResult||''}</span></div>
+ <div><b>دلیل ورود:</b> ${t.entryReason||''}</div>
+ <div><b>دلیل خروج:</b> ${t.exitReason||''}</div>
+ <div><b>دلیل استاپ:</b> ${t.stopReason||''}</div>
+ <div><b>RR:</b> ${t.rr||''}</div>
+ <div><b>PNL:</b> ${t.pnl||''}</div>
+ <div><b>یادداشت:</b> ${t.notes||''}</div>
+ ${t.screenshot ? `<img src="${t.screenshot}" style="max-width:100%;border-radius:12px">` : '<i>عکسی ثبت نشده</i>'}
+ </div>`;
+ document.getElementById('tradeModal').style.display='block';
+}
+
+</script>
+
+
+<div id="tradeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);padding:40px;overflow:auto;z-index:9999">
+<div style="background:#131b2e;padding:20px;border-radius:16px;max-width:900px;margin:auto">
+<button onclick="document.getElementById('tradeModal').style.display='none'">بستن</button>
+<div id="tradeModalContent"></div>
+</div></div>
+<script>
+document.addEventListener('dblclick',function(e){
+ const tr=e.target.closest('tr');
+ if(!tr||!window.trades)return;
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const r=document.getElementById('tradeResult');
+ if(r){r.value='SL Hit'; if(typeof toggleStopReason==='function') toggleStopReason();
+ r.addEventListener('change',toggleStopReason);}
+});
+</script>
+
+</body>
+
+</html>
